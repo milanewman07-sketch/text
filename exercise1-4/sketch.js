@@ -53,8 +53,29 @@ function mouseClicked() {
  * grass,0,0
  */
 function saveLevel() {
-    
+    let lines = "";
+
+    for (let sprite of placedSprites) {
+
+        // Determine the sprite name based on its image
+        let name;
+        if (sprite.getImage() === grass) name = "grass";
+        else if (sprite.getImage() === rock) name = "rock";
+        else if (sprite.getImage() === sand) name = "sand";
+        else if (sprite.getImage() === water) name = "water";
+        else if (sprite.getImage() === foxcat) name = "foxcat";
+
+        // Build one line of text: name,x,y
+        let line = name + "," + sprite.getX() + "," + sprite.getY();
+
+        // Add line with newline character
+        lines += line + "\n";
+    }
+
+    // Download as scene.txt
+    saveStrings([lines], "scene.txt");
 }
+
 
 /**
  * Finds the grid cell coordinate of a pixel.
