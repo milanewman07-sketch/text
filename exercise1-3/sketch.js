@@ -8,7 +8,7 @@ function preload() {
     rock = loadImage("assets/rock.png");
     sand = loadImage("assets/sand.png");
     water = loadImage("assets/water.png");
-    scene = loadStrings("assets/scene1.txt");
+    scene = loadStrings("assets/scene2.txt");
 }
 
 function setup() {
@@ -30,7 +30,25 @@ function draw() {
  * spriteName,xCoordinate,yCoordinate
  */
 function createSprites(tiles) {
-    
+
+    for (let line of tiles) {
+        // Break line into [name, xString, yString]
+        let parts = line.split(",");
+
+        let name = parts[0];
+        let x = parseInt(parts[1]);
+        let y = parseInt(parts[2]);
+
+        let img;
+
+        if (name === "grass") img = grass;
+        else if (name === "rock") img = rock;
+        else if (name === "sand") img = sand;
+        else if (name === "water") img = water;
+        else if (name === "foxcat") img = foxcat;
+
+        sprites.push(new Sprite(img, x, y));
+    }
 }
 
 /**
